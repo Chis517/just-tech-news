@@ -18,6 +18,7 @@ async function commentFormHandler(event) {
         'Content-Type': 'application/json'
       }
     });
+    
     if (response.ok) {
       document.location.reload();
     } else {

@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
         'vote_count'
       ]
     ],
-    order: [['created_at', 'DESC']],
     include: [
       {
         model: Comment,
@@ -26,7 +25,7 @@ router.get('/', (req, res) => {
           'user_id',
           'created_at'
         ],
-        include : {
+        include: {
           model: User,
           attributes: ['username']
         }
@@ -110,8 +109,8 @@ router.post('/', (req, res) => {
 // PUT /api/posts/upvote
 router.put('/upvote', (req, res) => {
   if (req.session) {
-    Post.upvote({ ...req.body, user_id: req.session.uder_id }, { Vote, Comment, User })
-      .then(updatedPostData => res.json(updatedPostData))
+    Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
+      .then(updatedVoteData => res.json(updatedVoteData))
       .catch(err => {
         console.log(err);
         res.status(400).json(err);
